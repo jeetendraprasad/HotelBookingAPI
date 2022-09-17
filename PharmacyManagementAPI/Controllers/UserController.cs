@@ -7,42 +7,42 @@ namespace PmsApi.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class HotelBookingController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly ApiContext _context;
 
-        public HotelBookingController(ApiContext context)
+        public UserController(ApiContext context)
         {
             _context = context;
         }
 
         // Create/Edit
         [HttpPost]
-        public JsonResult CreateEdit(HotelBooking booking)
+        public JsonResult CreateEdit(UserInfo model)
         {
-            if (booking.Id == 0)
+            if (model.Id == 0)
             {
-                _context.Bookings.Add(booking);
+                _context.Users.Add(model);
             } else
             {
-                var bookingInDb = _context.Bookings.Find(booking.Id);
+                var record = _context.Users.Find(model.Id);
 
-                if (bookingInDb == null)
+                if (record == null)
                     return new JsonResult(NotFound());
 
-                bookingInDb = booking;
+                record = model;
             }
 
             _context.SaveChanges();
 
-            return new JsonResult(Ok(booking));
+            return new JsonResult(Ok(model));
         }
 
         // Get
         [HttpGet]
         public JsonResult Get(int id)
         {
-            var result = _context.Bookings.Find(id);
+            var result = _context.Users.Find(id);
 
             if (result == null)
                 return new JsonResult(NotFound());
@@ -54,12 +54,12 @@ namespace PmsApi.Controllers
         [HttpDelete]
         public JsonResult Delete(int id)
         {
-            var result = _context.Bookings.Find(id);
+            var result = _context.Users.Find(id);
 
             if (result == null)
                 return new JsonResult(NotFound());
 
-            _context.Bookings.Remove(result);
+            _context.Users.Remove(result);
             _context.SaveChanges();
 
             return new JsonResult(NoContent());
@@ -69,7 +69,7 @@ namespace PmsApi.Controllers
         [HttpGet]
         public JsonResult GetAll()
         {
-            var result = _context.Bookings.ToList();
+            var result = _context.Users.ToList();
 
             return new JsonResult(Ok(result));
         }

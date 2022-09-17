@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using HotelBookingAPI.Data;
+using PmsApi.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

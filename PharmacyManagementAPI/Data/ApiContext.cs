@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using HotelBookingAPI.Models;
+using PmsApi.Models;
 
-namespace HotelBookingAPI.Data
+namespace PmsApi.Data
 {
     public class ApiContext : DbContext
     {

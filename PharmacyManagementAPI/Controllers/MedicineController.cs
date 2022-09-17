@@ -1,48 +1,52 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using HotelBookingAPI.Models;
-using HotelBookingAPI.Data;
+using PmsApi.Models;
+using PmsApi.Data;
 
-namespace HotelBookingAPI.Controllers
+namespace PmsApi.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
+    //[Route("api/[controller]/[action]")]
     [ApiController]
-    public class HotelBookingController : ControllerBase
+    public class MedicineController : ControllerBase
     {
         private readonly ApiContext _context;
 
-        public HotelBookingController(ApiContext context)
+        public MedicineController(ApiContext context)
         {
             _context = context;
         }
 
         // Create/Edit
         [HttpPost]
-        public JsonResult CreateEdit(HotelBooking booking)
+        [Route("CreateEditMedicine")]
+        public JsonResult CreateEdit(MedicineInfo medicine)
         {
-            if (booking.Id == 0)
+            if (medicine.Id == 0)
             {
-                _context.Bookings.Add(booking);
-            } else
+                _context.Medicines.Add(medicine);
+            }
+            else
             {
-                var bookingInDb = _context.Bookings.Find(booking.Id);
+                var medicineInDb = _context.Medicines.Find(medicine.Id);
 
-                if (bookingInDb == null)
+                if (medicineInDb == null)
                     return new JsonResult(NotFound());
 
-                bookingInDb = booking;
+                medicineInDb = medicine;
             }
 
             _context.SaveChanges();
 
-            return new JsonResult(Ok(booking));
+            return new JsonResult(Ok(medicine));
         }
 
         // Get
         [HttpGet]
+        [Route("GetMedicineById")]
         public JsonResult Get(int id)
         {
-            var result = _context.Bookings.Find(id);
+            var result = _context.Medicines.Find(id);
 
             if (result == null)
                 return new JsonResult(NotFound());
@@ -52,14 +56,15 @@ namespace HotelBookingAPI.Controllers
 
         // Delete
         [HttpDelete]
+        [Route("DeleteMedicine")]
         public JsonResult Delete(int id)
         {
-            var result = _context.Bookings.Find(id);
+            var result = _context.Medicines.Find(id);
 
             if (result == null)
                 return new JsonResult(NotFound());
 
-            _context.Bookings.Remove(result);
+            _context.Medicines.Remove(result);
             _context.SaveChanges();
 
             return new JsonResult(NoContent());
@@ -67,9 +72,10 @@ namespace HotelBookingAPI.Controllers
 
         // Get all
         [HttpGet]
+        [Route("GetAllMedicines")]
         public JsonResult GetAll()
         {
-            var result = _context.Bookings.ToList();
+            var result = _context.Medicines.ToList();
 
             return new JsonResult(Ok(result));
         }

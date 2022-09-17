@@ -1,4 +1,4 @@
-﻿namespace HotelBookingAPI.Models
+﻿namespace PmsApi.Models
 {
     public class HotelBooking
     {

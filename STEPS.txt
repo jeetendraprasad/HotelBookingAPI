@@ -5,7 +5,7 @@ Work folder is C:\tmp
 
 1> SET WORKFOLDER=C:\tmp
 cd %WORKFOLDER%\HotelBookingAPI-master\PharmacyManagementAPI
-2> Open %WORKFOLDER%\ folder in vscode (lewer version) to create files
+2> Open %WORKFOLDER%\ folder in vscode (newer version) to create files
 "%WORKFOLDER%\HotelBookingAPI-master\PharmacyManagementAPI\.vscode\launch.json"
 "%WORKFOLDER%\HotelBookingAPI-master\PharmacyManagementAPI\.vscode\tasks.json"
 
@@ -17,11 +17,27 @@ nuget.exe sources Disable -Name nuget.org
 #nuget.exe sources Enable -Name nuget.org
 nuget.exe sources Add -Name local_repo -Source https://local_repo_url/
 
-3> dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+3> dotnet remove package Microsoft.EntityFrameworkCore.InMemory
 dotnet add package Microsoft.EntityFrameworkCore.Design
-dotnet add package Microsoft.EntityFrameworkCore.InMemory
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite
 
 4> dotnet tool install --global dotnet-ef
 
-5> dotnet ef migrations add InitialCreate
+5> SET PATH=%USERPROFILE%\.dotnet\tools;%PATH%
+
+6> dotnet ef migrations add InitialCreate
 dotnet ef database update
+
+7> Install the VS code extension "C# for Visual Studio Code (powered by OmniSharp)"
+Note: Use newer version of VS Code
+
+8> In VS code Open folder '%WORKFOLDER%\HotelBookingAPI-master\PharmacyManagementAPI'
+
+9> Restore C# assets.
+Following files will be created:-
+"%WORKFOLDER%\HotelBookingAPI-master\PharmacyManagementAPI\.vscode\launch.json"
+"%WORKFOLDER%\HotelBookingAPI-master\PharmacyManagementAPI\.vscode\tasks.json"
+
+10> In vscode press F5 to debug.
+11> Open URL https://localhost:7064/swagger/index.html in browser.
+Accept security certificate warning and continue.

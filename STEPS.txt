@@ -44,7 +44,7 @@ Accept security certificate warning and continue.
 
 
 
-12> Project name was changed to https://github.com/jeetendraprasad/HotelBookingAPI.git
+12> Project name was changed to https://github.com/jeetendraprasad/PharmacyManagementAPI
 
 
 Docker changes
@@ -60,3 +60,6 @@ docker run -d -e ASPNETCORE_ENVIRONMENT=Development -p 8080:80 --name pharmacyma
 Accept security certificate warning and continue.
 
 15> curl http://localhost:8080/api/Medicine/GetAllMedicines
+
+16> Pushed to docker hub as
+https://hub.docker.com/r/jeetendraprasad/pharmacymanagementapi

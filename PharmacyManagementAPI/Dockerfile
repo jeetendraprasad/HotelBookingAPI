@@ -13,9 +13,6 @@ RUN dotnet restore
 COPY . ./
 RUN dotnet publish -c Release -o out
 
-
-RUN pwd
-RUN ls -l
 COPY Pizzas.db ./
     
 # Build runtime image

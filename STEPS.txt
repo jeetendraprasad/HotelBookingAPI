@@ -41,3 +41,30 @@ Following files will be created:-
 10> In vscode press F5 to debug.
 11> Open URL https://localhost:7064/swagger/index.html in browser.
 Accept security certificate warning and continue.
+
+
+
+
+
+	
+More changes
+------------
+
+12> Now I have disabled https Redirection and Authorisation in Program.cs file as
+
+//app.UseHttpsRedirection();
+//app.UseAuthorization();
+
+So we can:-
+In vscode press F5 to debug.
+curl "https://localhost:7064/api/Medicine/GetAllMedicines"
+and also https://localhost:7064/swagger/index.html
+
+
+Docker changes
+--------------
+cd P:\HOMEPATH\repos\Pharmacy\PharmacyManagementAPI
+create dockerfile (using vscode docker plugin)
+docker build -t pharmacymanagementapi .
+docker run -d -e ASPNETCORE_ENVIRONMENT=Development -p 8080:80 --name pharmacymanagementapi pharmacymanagementapi
+http://localhost:8080/swagger/index.html

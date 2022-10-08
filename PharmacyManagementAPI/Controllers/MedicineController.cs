@@ -75,7 +75,25 @@ namespace PmsApi.Controllers
         [Route("GetAllMedicines")]
         public JsonResult GetAll()
         {
-            var result = _context.Medicines.ToList();
+            List<MedicineInfo>result = null;
+            String exMsg = "";
+            
+            try
+            {
+                result = _context.Medicines.ToList();    
+            }
+            catch (System.Exception ex)
+            {
+                exMsg = ex.ToString();
+                exMsg += Environment.NewLine;
+                exMsg += ex.StackTrace;
+                //throw;
+            }
+
+            if(!string.IsNullOrEmpty(exMsg))
+            {
+                return new JsonResult(Ok(exMsg));    
+            }
 
             return new JsonResult(Ok(result));
         }

@@ -1,7 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using PmsApi.Data;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var path = System.IO.Directory.GetCurrentDirectory();
+
+Console.WriteLine("Path is " + path);
 
 var connectionString = builder.Configuration.GetConnectionString("Pizzas") ?? "Data Source=Pizzas.db";
 
